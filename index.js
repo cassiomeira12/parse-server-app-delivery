@@ -92,6 +92,8 @@ try {
 }
 
 const projectPath = config.projectPath || __dirname;
+
+const webAppPath = process.env.WEB_APP || '/';
 const webFolder = process.env.WEB_APP_FOLDER || '/public';
 
 app.use('/public', express.static(resolve(projectPath + '/public')));
@@ -100,10 +102,8 @@ if (webFolder === '/public') {
   app.use(express.static(resolve(projectPath + '/public')));
 } else {
   app.use(express.static(resolve(projectPath + webFolder)));
-  app.use(webFolder, express.static(resolve(projectPath + webFolder)));
+  app.use(webAppPath, express.static(resolve(projectPath + webFolder)));
 }
-
-const webAppPath = process.env.WEB_APP || '/';
 
 if (webAppPath !== '/') {
   app.get('/', (_, res) => {
@@ -112,7 +112,7 @@ if (webAppPath !== '/') {
 }
 
 app.get(webAppPath, (_, res) => {
-  res.sendFile(resolve(projectPath + webFolder + 'index.html'));
+  res.sendFile(resolve(projectPath + webFolder + '/index.html'));
 });
 
 var usersDashboards = undefined;
@@ -147,7 +147,7 @@ const parseDashboard = new ParseDashboard({
 
 app.use('/dashboard', parseDashboard);
 
-var allowedOrigins = process.env.ALLOWED_ORIGINS_CORS;
+var allowedOrigins = process.env.ALLOWED_ORIGINS_CORS || [];
 
 if (allowedOrigins) {
   app.use(helmet.hidePoweredBy());
@@ -174,12 +174,14 @@ if (allowedOrigins) {
 
 app.all('*', (req, res, next) => {
   const origin = req.get('origin');
-  const url = req.originalUrl
-  if (origin === undefined && url != "/parse/health") {
-    if (req.header("X-Parse-Client-Key") !== config.clientKey) {
-      return res.status(403).send({
-        "error": "unauthorized"
-      });
+  const url = req.originalUrl;
+  if (origin === undefined) {
+    if (url !== '/parse/health' && url !== '/parse/users/me') {
+      if (req.header('X-Parse-Client-Key') !== config.clientKey) {
+        return res.status(403).send({
+          'error': 'unauthorized',
+        });
+      }
     }
   }
   next();
