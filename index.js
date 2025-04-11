@@ -92,18 +92,27 @@ try {
 }
 
 const projectPath = config.projectPath || __dirname;
+const webFolder = process.env.WEB_APP_FOLDER || '/public';
 
-app.use(express.static(resolve(projectPath + '/public')));
 app.use('/public', express.static(resolve(projectPath + '/public')));
 
-if (process.env.WEB_APP !== '/') {
+if (webFolder === '/public') {
+  app.use(express.static(resolve(projectPath + '/public')));
+} else {
+  app.use(express.static(resolve(projectPath + webFolder)));
+  app.use(webFolder, express.static(resolve(projectPath + webFolder)));
+}
+
+const webAppPath = process.env.WEB_APP || '/';
+
+if (webAppPath !== '/') {
   app.get('/', (_, res) => {
-    res.redirect(process.env.WEB_APP);
+    res.redirect(webAppPath);
   });
 }
 
-app.get(process.env.WEB_APP, (_, res) => {
-  res.sendFile(resolve(projectPath + '/public/index.html'));
+app.get(webAppPath, (_, res) => {
+  res.sendFile(resolve(projectPath + webFolder + 'index.html'));
 });
 
 var usersDashboards = undefined;
