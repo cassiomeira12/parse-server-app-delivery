@@ -74,7 +74,7 @@ const config = {
   },
   "serverStartComplete": () => {
     console.log('Parse server started');
-    console.log(defaultData);
+    // Parse.Cloud.startJob("createDefaultData", {"data": defaultData});
   }
 };
 
@@ -96,14 +96,14 @@ const projectPath = config.projectPath || __dirname;
 app.use(express.static(resolve(projectPath + '/public')));
 app.use('/public', express.static(resolve(projectPath + '/public')));
 
-if (process.env.WEB_APP !== "/") {
-  app.get("/", (_, res) => {
+if (process.env.WEB_APP !== '/') {
+  app.get('/', (_, res) => {
     res.redirect(process.env.WEB_APP);
   });
 }
 
 app.get(process.env.WEB_APP, (_, res) => {
-  res.sendFile(resolve(projectPath + '/public/test.html'));
+  res.sendFile(resolve(projectPath + '/public/index.html'));
 });
 
 var usersDashboards = undefined;
@@ -120,14 +120,14 @@ const parseDashboard = new ParseDashboard({
   apps: [
     ...dashboardApps,
     {
-      "appName": process.env.APP_NAME,
-      "appId": process.env.APP_ID,
-      "masterKey": process.env.MASTER_KEY,
-      "serverURL": serverURL + parseMount,
-      "graphQLServerURL": graphQLServerURL,
-      "enableSecurityChecks": true,
-      "iconName": process.env.ICON,
-      "production": false
+      'appName': process.env.APP_NAME,
+      'appId': process.env.APP_ID,
+      'masterKey': process.env.MASTER_KEY,
+      'serverURL': serverURL + parseMount,
+      'graphQLServerURL': graphQLServerURL,
+      'enableSecurityChecks': true,
+      'iconName': process.env.ICON,
+      'production': false
     }
   ],
   iconsFolder: process.env.ICONS_FOLDER,
