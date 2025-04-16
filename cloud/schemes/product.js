@@ -12,6 +12,25 @@ const ProductScheme = {
       type: "Number",
       require: true,
     },
+    discount: {
+      type: "Number",
+      require: false,
+    },
+    company: {
+      type: "Pointer",
+      targetClass: "Company",
+      require: true,
+    },
+    status: {
+      type: "Pointer",
+      targetClass: "ProductStatus",
+      require: false,
+    },
+    category: {
+      type: "Pointer",
+      targetClass: "ProductCategory",
+      require: false,
+    },
   },
   protectedFields: {
     "*": [],
