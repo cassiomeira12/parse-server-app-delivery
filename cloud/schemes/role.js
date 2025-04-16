@@ -28,9 +28,6 @@ const RoleDefaultData = {
   "items": [
     {
       "name": "Admin",
-    },
-    {
-      "name": "Entregador",
     }
   ],
 }
