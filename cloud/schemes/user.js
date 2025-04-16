@@ -20,7 +20,12 @@ const UserScheme = {
     locale: {
       type: "String",
       require: false,
-    }
+    },
+    company: {
+      type: "Pointer",
+      targetClass: "Company",
+      require: false,
+    },
   },
   classLevelPermissions: {
     get: {
@@ -50,7 +55,14 @@ const UserScheme = {
 
 const UserDefaultData = {
   "class": "_User",
-  "items": [],
+  "items": [
+    {
+      "name": "Admin",
+      "username": "admin@email.com",
+      "email": "admin@email.com",
+      "password": "123456",
+    },
+  ],
 }
 
 module.exports = { UserScheme, UserDefaultData };
