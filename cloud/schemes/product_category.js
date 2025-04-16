@@ -1,5 +1,5 @@
-const PaymentTypeScheme = {
-  className: "PaymentType",
+const ProductCategoryScheme = {
+  className: "ProductCategory",
   fields: {
     name: {
       type: "String",
@@ -36,19 +36,9 @@ const PaymentTypeScheme = {
   },
 };
 
-const PaymentTypeDefaultData = {
-  "class": "PaymentType",
-  "items": [
-    {
-      "name": "Dinheiro",
-    },
-    {
-      "name": "Pix",
-    },
-    {
-      "name": "Cartão (Crédito, Débito)",
-    }
-  ],
+const ProductCategoryDefaultData = {
+  "class": "ProductCategory",
+  "items": [],
 }
 
-module.exports = { PaymentTypeScheme, PaymentTypeDefaultData };
+module.exports = { ProductCategoryScheme, ProductCategoryDefaultData };

@@ -1,14 +1,9 @@
-const PaymentTypeScheme = {
-  className: "PaymentType",
+const CompanyScheme = {
+  className: "Company",
   fields: {
     name: {
       type: "String",
       require: true,
-    },
-    company: {
-      type: "Pointer",
-      targetClass: "Company",
-      require: false,
     },
   },
   protectedFields: {
@@ -36,19 +31,9 @@ const PaymentTypeScheme = {
   },
 };
 
-const PaymentTypeDefaultData = {
-  "class": "PaymentType",
-  "items": [
-    {
-      "name": "Dinheiro",
-    },
-    {
-      "name": "Pix",
-    },
-    {
-      "name": "Cartão (Crédito, Débito)",
-    }
-  ],
+const CompanyDefaultData = {
+  "class": "Company",
+  "items": [],
 }
 
-module.exports = { PaymentTypeScheme, PaymentTypeDefaultData };
+module.exports = { CompanyScheme, CompanyDefaultData };

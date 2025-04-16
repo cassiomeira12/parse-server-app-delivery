@@ -7,12 +7,15 @@ const OrderScheme = {
     },
     phoneNumber: {
       type: "String",
+      require: false,
     },
     address: {
       type: "String",
+      require: false,
     },
     addressGpsLocation: {
       type: "String",
+      require: false,
     },
     items: {
       type: "Relation",
@@ -21,6 +24,7 @@ const OrderScheme = {
     },
     note: {
       type: "String",
+      require: false,
     },
     paymentType: {
       type: "Pointer",
@@ -29,6 +33,7 @@ const OrderScheme = {
     },
     paymentChange: {
       type: "String",
+      require: false,
     },
     status: {
       type: "Pointer",
@@ -38,6 +43,17 @@ const OrderScheme = {
     deliveryMan: {
       type: "Pointer",
       targetClass: "_User",
+      require: false,
+    },
+    attendant: {
+      type: "Pointer",
+      targetClass: "_User",
+      require: true,
+    },
+    company: {
+      type: "Pointer",
+      targetClass: "Company",
+      require: true,
     }
   },
   protectedFields: {

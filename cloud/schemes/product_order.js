@@ -5,9 +5,24 @@ const ProductOrderScheme = {
       type: "Number",
       require: true,
     },
-    product: {
+    name: {
+      type: "String",
+      require: true,
+    },
+    description: {
+      type: "String",
+    },
+    price: {
+      type: "Number",
+      require: true,
+    },
+    discount: {
+      type: "Number",
+      require: false,
+    },
+    company: {
       type: "Pointer",
-      targetClass: "Product",
+      targetClass: "Company",
       require: true,
     },
   },

@@ -77,4 +77,4 @@ const OrderStatusDefaultData = {
   ],
 }
 
-module.exports = { OrderStatus, OrderStatusDefaultData };
+module.exports = { OrderStatusScheme, OrderStatusDefaultData };
