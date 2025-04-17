@@ -2,6 +2,7 @@ require('./installation/installation');
 require('./functions');
 require('./triggers');
 require('./whatsapp/whatsapp_two_factor_authentication');
+require('./user/user');
 require('./login/login');
 require('./login/signup');
 require('./roles');

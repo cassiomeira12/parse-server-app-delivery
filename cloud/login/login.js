@@ -1,4 +1,4 @@
-const { getUserPermissions } = require('./signup');
+const { getUserData } = require('../user/user');
 
 Parse.Cloud.define('login', async (request) => {
   const { params } = request;
@@ -53,19 +53,5 @@ Parse.Cloud.define("change-password", async (request) => {
 const login = async (username, password, installationId) => {
   const user = await Parse.User.logIn(username, password, { installationId: installationId });
 
-  const permissionsRoles =  await getUserPermissions(user);
-
-  const name = user.get("name");
-  const avatarUrl = `https://ui-avatars.com/api/?format=png&name=${name.replace(" ", "+")}`;
-
-  const userJson = user.toJSON();
-
-  delete userJson['ACL'];
-  userJson['avatarUrl'] = userJson['avatarUrl'] ?? avatarUrl;
-  userJson['permissions'] = permissionsRoles;
-  userJson['createdAt'] = user.createdAt.toISOString();
-  userJson['updatedAt'] = user.updatedAt.toISOString();
-  userJson['sessionToken'] = user.get("sessionToken");
-
-  return userJson;
+  return await getUserData(user);
 }

@@ -27,8 +27,8 @@ const schemes = [
   UserScheme, // Default
   UserDeletedScheme, // Default
   VersionAppScheme, // Default
-  // TermsScheme,
-  // UserTermsScheme,
+  // TermsScheme, // Default
+  // UserTermsScheme, // Default
   PushNotificationScheme, // Default
   NotificationScheme, // Default
   //
@@ -48,10 +48,11 @@ const defaultData = [
   UserDefaultData, // Default
   UserDeletedDefaultData, // Default
   VersionAppDefaultData, // Default
-  TermDefaultData, // Default
-  UserTermDefaultData, // Default
+  // TermDefaultData, // Default
+  // UserTermDefaultData, // Default
   PushNotificationDefaultData, // Default
   NotificationDefaultData, // Default
+  //
   ProductStatusDefaultData,
   ProductCategoryDefaultData,
   ProductDefaultData,
