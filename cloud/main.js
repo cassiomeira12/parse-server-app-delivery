@@ -12,5 +12,6 @@ require('./notification/notification');
 
 require('./company/company');
 require('./order/order');
+require('./product/product');
 
 module.exports.app = require('./app');

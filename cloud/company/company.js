@@ -34,3 +34,43 @@ Parse.Cloud.define('create-company', async (request) => {
   fields: ['name'],
   requireUser: true
 });
+
+Parse.Cloud.define('list-attendant', async (request) => {
+  const { user } = request;
+
+  const queryUser = new Parse.Query("_User");
+  const userData = await queryUser.get(user.id, { useMasterKey: true });
+
+  const companyId = userData.get("company").id;
+
+  const queryRole = new Parse.Query("_Role");
+  queryRole.equalTo("name", `Attendant-${companyId}`);
+
+  const role = await queryRole.first({ useMasterKey: true });
+
+  const queryRelationUser = role.get("users").query();
+
+  return await queryRelationUser.find({ useMasterKey: true });
+}, {
+  requireUser: true
+});
+
+Parse.Cloud.define('list-deliveryman', async (request) => {
+  const { user } = request;
+
+  const queryUser = new Parse.Query("_User");
+  const userData = await queryUser.get(user.id, { useMasterKey: true });
+
+  const companyId = userData.get("company").id;
+
+  const queryRole = new Parse.Query("_Role");
+  queryRole.equalTo("name", `DeliveryMan-${companyId}`);
+
+  const role = await queryRole.first({ useMasterKey: true });
+
+  const queryRelationUser = role.get("users").query();
+
+  return await queryRelationUser.find({ useMasterKey: true });
+}, {
+  requireUser: true
+});
